@@ -4,19 +4,27 @@ Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten. Bijgevoed i
 tabel *users*
 Zie hiervoor database.sql zorg ervoor dat je dit bestand niet in je project folder laat staan.
 
-Let op dat wachtwoorden versleuteld worden opgeslagen in de database. In de database staan twee users
+Let op dat wachtwoorden versleuteld worden opgeslagen in de database.
 
-- admin@psg.nl met ww: admin
-- user@psg.nl met ww: user
-- test@mail.nl met ww: test
+### Installeren
+- Importeer de database met de tabel users door het uitvoeren van database.sql
+- Pas de configuratie parameters aan in config.php 
+- Voor het script create_users.php uit [create_users.php](http://localhost/create_users.php) (of pas eerst aan naar wens)
+   Met het script create_users.php worden de volgende gebruikers aangemaakt
+  - admin@psg.nl met ww: admin
+  - user@psg.nl met ww: user
+  - test@mail.nl met ww: test
 
 ### Opzet
 
 - Startpagina *index.php*
 - Controle op toegangsrechten *auth.php*
-- Functies die je graag op je pagina gebruikt komen in *functions.php*
+- Functies die je graag in je pagina gebruikt komen in *functions.php*
 - Afhandelen van de login *login.php*
 - variabele die je over wilt gebruiken in *config.php*
+- Menu in *menu.php*
+- Stylesheets en anders header parameters in *header.php*
+- Alles in de footer in *footer.php*
 
 ### Pagina's
 
@@ -24,12 +32,6 @@ Let op dat wachtwoorden versleuteld worden opgeslagen in de database. In de data
 - Voorbeeld beveiligde pagina waar je alleen met inloggen op kan *pagina1.php*
 - Voorbeeld beveiligde pagina waar je alleen met bepaalde rol op kan *admin.php*
 - Inlogpagina *login.php*
-
-### Opbouw pagina
-
-- Bovenkant van de pagina *header.php*
-- Menu van de pagina *menu.php*
-- Onderkant van de pagina *footer.php*
 
 ### Layout onbeveiligde pagina
 
