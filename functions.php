@@ -46,12 +46,16 @@ function debug()
  *
  * */
 
-function makeToken()
+function makeToken($field=true)
 {
     $bytes = random_bytes(20);
     $token = bin2hex($bytes);
     $_SESSION['tokens'][] = $token;
-    echo "<input type=\"hidden\" name=\"_token\" value=\"$token\">";
+    if($field){
+        echo "<input type=\"hidden\" name=\"_token\" value=\"$token\">";
+    }else{
+        echo $token;
+    }
 }
 
 //aliases
@@ -69,10 +73,12 @@ function setToken()
  * Na het versturen van een formulier kan je validateToken() gebruiken om te controleren of de token bestaat
  * zie als voorbeeld login.php
  * */
-function validateToken()
+function validateToken($empty=true)
 {
     if (in_array($_POST['_token'] ?? '', $_SESSION['tokens'] ?? [])) {
-        $_SESSION['tokens'] = [];
+        if($empty) {
+            $_SESSION['tokens'] = [];
+        }
         return true;
     }
     return false;

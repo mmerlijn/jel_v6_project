@@ -73,3 +73,10 @@ if(!hasRole('admin')){
 
 <?php include "footer.php"; ?>
 ```
+
+### Extra's
+In de *header.php* worden [vue.js](https://vuejs.org/v2/guide) en axios libraries ingeladen.
+In de pagina *admin.php* is een voorbeeld te vinden hoe je dit kan gebruiken om bijvoorbeeld naar users te zoeken.
+Het werkelijke zoeken gebeurt in *zoek_users.php*
+Vue.js samen met axios maken het mogelijk om zonder een page-refresh te zoeken naar data.
+Door middel van *F12* -> *netwerk* kan je zien wat er wordt verstuurd tijdens het zoeken.
