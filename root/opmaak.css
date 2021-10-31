@@ -1,0 +1,31 @@
+body {
+    /* background-color: cornsilk; */
+    /* color: dimgray; */
+}
+.has-text-pink {
+    color: rgb(231, 149, 192);
+}
+.has-text-purple {
+    color: rgb(132, 46, 117);
+}
+.has-background-purple {
+    background-color: rgb(132, 46, 117);
+}
+.has-background-pink {
+    background-color: rgb(231, 149, 192);
+}
+.is-pink {
+    background-color: rgb(231, 149, 192);
+    color: black;
+}
+.is-purple {
+    background-color: rgb(132, 46, 117);
+    color:hsl(0, 0%, 96%);
+}
+.h-1 {height: 3rem;}
+.h-2 {height: 2.5rem;}
+.h-3 {height: 2rem;}
+.h-4 {height: 1.5rem;}
+.h-5 {height: 1.25rem;}
+.h-6 {height: 1rem;}
+.h-7 {height: 0.75rem;}

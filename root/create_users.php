@@ -6,8 +6,8 @@
  *
  * */
 //connectie met de gewenste database
-include "config.php";
-include "connect.php";
+include "../src/config.php";
+include "../src/connect.php";
 
 if (!$debug) {
     exit();

@@ -1,6 +1,6 @@
 <?php
 //voor de handigheid kan je ook functies aanmaken
-function isLogin()
+function isLogin(): bool
 {
     if ($_SESSION['user']['id'] ?? false) {
         return true;
@@ -8,7 +8,7 @@ function isLogin()
     return false;
 }
 
-function hasRole($role)
+function hasRole($role):bool
 {
     if ($_SESSION['user']['id'] ?? false) {
         return $_SESSION['user']['role'] == $role;
@@ -16,28 +16,12 @@ function hasRole($role)
     return false;
 }
 
-function username()
+function username():string
 {
     if ($_SESSION['user']['id'] ?? false) {
         return $_SESSION['user']['voornaam'] . " " . $_SESSION['user']['tussenvoegsel'] . " " . $_SESSION['user']['achternaam'];
     }
     return '';
-}
-
-function debug()
-{
-    if (!$GLOBALS['debug']) {
-        return;
-    }
-    echo "<br><br>";
-    echo "<pre class=\"m-4 p-4 has-background-black has-text-white is-family-monospace\">";
-    echo "POST contains: \n";
-    var_dump($_POST);
-    echo "-----------------------------------------------------------\n";
-    echo "SESSION contains: \n";
-    var_dump($_SESSION);
-    echo "Debug info kan worden uitgezet in config.php\n";
-    echo "</pre>";
 }
 
 /*
@@ -46,7 +30,7 @@ function debug()
  *
  * */
 
-function makeToken($field = true)
+function makeToken($field = true): void
 {
     $bytes = random_bytes(20);
     $token = bin2hex($bytes);
@@ -59,12 +43,11 @@ function makeToken($field = true)
 }
 
 //aliases
-function getToken()
+function getToken():void
 {
     makeToken();
 }
-
-function setToken()
+function setToken():void
 {
     makeToken();
 }
@@ -84,14 +67,16 @@ function validateToken($empty = true): bool
     return false;
 }
 
+//wordt gebruikt indien de applicatie niet in de root directory staat
 function getPath(): string
 {
     return str_replace("//", "/", pathinfo($_SERVER['REQUEST_URI'])['dirname'] . "/");
 }
 
-function getNonce()
+//wordt gebruikt voor Content Security Policy
+function getNonce(): string
 {
-    if (!$_SESSION['nonce']) {
+    if (!isset($_SESSION['nonce'])) {
         $bytes = random_bytes(20);
         $_SESSION['nonce'] = bin2hex($bytes);
     }

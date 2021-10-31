@@ -1,5 +1,5 @@
-<?php include "start.php"; ?>
-<?php include "header.php"; ?>
+<?php include "../src/start.php"; ?>
+<?php include "../src/header.php"; ?>
 
     <!-- hier komt je content -->
     <div class="hero-body">
@@ -12,4 +12,5 @@
     </div>
 
 
-<?php include "footer.php"; ?>
+
+<?php include "../src/footer.php"; ?>

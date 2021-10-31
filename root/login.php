@@ -1,4 +1,4 @@
-<?php include "start.php"; ?>
+<?php include "../src/start.php"; ?>
 <?php
 //er is een login poging verstuurd
 if (isset($_POST['login'])) {
@@ -42,7 +42,7 @@ if (isset($_POST['login'])) {
 }
 
 ?>
-<?php include "header.php"; ?>
+<?php include "../src/header.php"; ?>
 
     <div class="is-center mt-6">
         <div class="card column is-half is-offset-one-quarter">
@@ -78,4 +78,4 @@ if (isset($_POST['login'])) {
     </div>
 
 
-<?php include "footer.php"; ?>
+<?php include "../src/footer.php"; ?>

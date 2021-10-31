@@ -1,7 +1,7 @@
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<nav class="navbar is-pink" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="index.php">
-            <img src="logo.png" height="28"> <span class="ml-4">Jan van Egmond Lyceum</span>
+            <img src="logo.png" height="28"> <span class="ml-4 is-size-4 has-text-purple has-text-weight-bold">Jan van Egmond Lyceum</span>
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -14,16 +14,26 @@
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
             <a class="navbar-item" href="index.php">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
                 Home
             </a>
             <?php
             if (hasRole('admin')) {
                 ?>
-                <a href="admin.php" class="navbar-item">Admin</a>
+                <a href="admin.php" class="navbar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                    Admin</a>
                 <?php
             }
             ?>
             <a class="navbar-item" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
                 Contact
             </a>
 
@@ -65,7 +75,7 @@
                         <?php
                     } else {
                         ?>
-                        <a class="button is-primary">
+                        <a class="button is-purple">
                             <strong>Sign up</strong>
                         </a>
                         <a class="button is-light" href="login.php">

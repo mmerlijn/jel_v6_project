@@ -1,6 +1,6 @@
 <?php
-include "start.php";
-include "auth.php";
+include "../src/start.php";
+include "../src/auth.php";
 
 // request json omzetten naar $_POST
 $_POST = json_decode(file_get_contents('php://input'), true);
