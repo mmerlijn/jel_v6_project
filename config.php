@@ -11,6 +11,6 @@ $database = [
     'name' => "v6",
     'host' => "localhost",
     'user' => "root",
-    'pwd' => "secret",
+    'pwd' => "",
     'port' => "3306",
 ];

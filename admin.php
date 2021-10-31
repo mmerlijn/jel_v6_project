@@ -27,7 +27,7 @@ if (!hasRole('admin')) {
 
     </div>
 </div>
-<script>
+<script nonce="<?php echo getNonce(); ?>">
     var app = new Vue({
         el: '#app',
         data: {
@@ -38,7 +38,7 @@ if (!hasRole('admin')) {
             zoekUser: function () {
                 var vm = this;
                 //ajax request kijk met F12 bij netwerk wat er gebeurt
-                axios.post('/zoek_users.php', {
+                axios.post('<?php echo getPath();?>zoek_users.php', {
                     zoek: vm.zoekVeld,
                     _token: '<?php makeToken(false);?>', //voor veiligheid
                 })
