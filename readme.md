@@ -6,20 +6,22 @@ Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten.
 - Download de de code. Na het downloaden kan deze worden geplaatst in de UsbWebserver directory de map *root* zal worden overschreven en de map *src* zal worden toegevoegd.
 - Importeer de database met de tabel users, deze staat in src/database.sql
   - Dit maakt een database `v6` aan met een tabel `users`
+  - In de database staan 3 gebruikers
+    - admin@psg.nl met ww: admin
+    - user@psg.nl met ww: user
+    - test@mail.nl met ww: test
 - Pas de configuratie parameters aan in src/config.php
   - Om het te laten werken moet minimaal het wachtwoord van de database user worden aangepast
   - Daarnaast is het handig om de charset goed te zetten
-- Voor het script create_users.php uit [create_users.php](http://localhost/create_users.php) (of pas eerst aan naar wens)
-   Met het script create_users.php worden de volgende gebruikers aangemaakt
-  - admin@psg.nl met ww: admin
-  - user@psg.nl met ww: user
-  - test@mail.nl met ww: test
+- Opioneel: Voer het script create_users.php uit [create_users.php](http://localhost/create_users.php) (of pas eerst aan naar wens)
+   Met het script *create_users.php* worden gebruikeraccounts aangemaakt
   
-  **Nadat de users aangemaakt zijn moet het bestand create_users.php verwijderd worden !!!** 
+  **Nadat de gebruikers aangemaakt zijn moet het bestand *create_users.php* worden verwijderd!!!** 
 
 ### Opzet
 
 - Startpagina *index.php*
+- Aanroep van de benodigde scripts in *start.php*
 - Controle op toegangsrechten *auth.php*
 - Functies die je graag in je pagina gebruikt komen in *functions.php*
 - Afhandelen van de login *login.php*
@@ -27,13 +29,14 @@ Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten.
 - Menu in *menu.php*
 - Stylesheets en anders header parameters in *header.php*
 - Alles in de footer in *footer.php*
-- Aanroep van de benodigde scripts in *start.php*
+
 
 ### Pagina's
 
 - Startpagina *index.php*
 - Voorbeeld beveiligde pagina waar je alleen met inloggen op kan *pagina1.php*
 - Voorbeeld beveiligde pagina waar je alleen met bepaalde rol op kan *admin.php*
+- Voorbeeld VueJs pagina (alleen met role=admin) *zoek-users.php*
 - Inlogpagina *login.php*
 
 ### Layout onbeveiligde pagina
@@ -100,6 +103,12 @@ Indien je een zelf een stukje javascript wilt toevoegen aan je project kan je da
 // je script code
 </script>
 ```
+Indien je op een speficieke pagina een stukje CSS wilt toevoegen kan dat alsvolgt
+```html
+<style nonce="<?php echo getNonce(); ?>">
+/* je script code */
+</style>
+```
 
 Inline styles/scripts worden default geblokkeerd. Kijk regelmatig even bij `developer tools -> console` hier kan je zien dat bepaalde code wordt geblokkeerd. Wanneer je dit toch wilt toestaan kan dit door het aanpassen van de CSP header in *start.php*
 
@@ -112,11 +121,13 @@ Deze token kan eenvoudig aan je formulier worden toegevoegd d.m.v. `<?php makeTo
   <?php makeToken(); ?>
 </form>
 ```
+Bij een api-request (via VueJs) zal deze token automatisch worden meegestuurd.
+Alle meegestuurde tokens zullen in *start.php* automatisch worden gevalideerd.
 
 ### Extra's
 In de *src/header.php* worden [vue.js](https://vuejs.org/v2/guide) en axios libraries ingeladen.
-In de pagina *admin.php* is een voorbeeld te vinden hoe je dit kan gebruiken om bijvoorbeeld naar users te zoeken.
-Het werkelijke zoeken gebeurt in *zoek_users.php*
+In de pagina *zoek-users.php* is een voorbeeld te vinden hoe je dit kan gebruiken om bijvoorbeeld naar users te zoeken. (alleen toegankelijk voor admins)
+Het werkelijke zoeken gebeurt in *api/zoek_users.php*
 Vue.js samen met axios maken het mogelijk om zonder een page-refresh te zoeken naar data.
 Door middel van *F12* -> *netwerk* kan je zien wat er wordt verstuurd tijdens het zoeken.
 

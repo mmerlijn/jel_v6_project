@@ -1,7 +1,7 @@
 <nav class="navbar is-pink" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="index.php">
-            <img src="logo.png" height="28"> <span class="ml-4 is-size-4 has-text-purple has-text-weight-bold">Jan van Egmond Lyceum</span>
+            <img src="<?php echo getPath();?>logo.png" height="28"> <span class="ml-4 is-size-4 has-text-purple has-text-weight-bold">Jan van Egmond Lyceum</span>
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -27,6 +27,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                     </svg>
                     Admin</a>
+                <?php
+            }
+            ?>
+            <?php
+            if (hasRole('admin')) {
+                ?>
+                <a href="zoek-users.php" class="navbar-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 pr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                    Gebruikers</a>
                 <?php
             }
             ?>

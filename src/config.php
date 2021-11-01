@@ -4,7 +4,8 @@ $debug = true; //true / false (geeft session / post variabele weer)
 //pagina specifieke kenmerken
 $page = [
     'title' => 'V6 MySQL/PHP project',
-    'by' => 'Menno Merlijn &copy;'
+    'by' => 'Menno Merlijn &copy;',
+    'charset' => "utf8",
 ];
 
 $database = [

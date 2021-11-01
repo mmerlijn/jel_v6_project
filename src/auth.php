@@ -4,6 +4,6 @@ if(!isLogin()) {
     //Welke pagina wilde de gebruiker bezoeken
     $_SESSION['to'] = $_SERVER['PHP_SELF'];
     //doorverwijzing naar de inlog pagina
-    header("location: /login.php");
+    header("location: ".getPath()."login.php");
     exit();
 }

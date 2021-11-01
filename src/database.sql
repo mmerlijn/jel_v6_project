@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `voornaam` varchar(80) NOT NULL,
   `tussenvoegsel` varchar(20) DEFAULT NULL,
   `achternaam` varchar(80) NOT NULL,
-  `role` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'admin / user',
+  `role` varchar(20) NOT NULL COMMENT 'bv. admin / user',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `deleted_at` timestamp NULL DEFAULT NULL,

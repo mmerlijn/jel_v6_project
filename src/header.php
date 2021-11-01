@@ -8,15 +8,21 @@
     <title><?php echo $page['title']; ?></title>
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <!-- Onderstaande script alleen laten staan als je ook gebruik van vue.js gaan maken -->
+    <!-- Onderstaande script alleen laten staan als je ook gebruik van VueJs gaan maken -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script nonce="<?php echo getNonce();?>">
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+        axios.defaults.headers.common['X-CSRF-TOKEN'] = '<?php makeApiToken(false);?>';
+    </script>
+    <!-- einde scripts voor VueJs -->
 
-    <link rel="stylesheet" href="opmaak.css" nonce="<?php echo getNonce(); ?>">
+    <!-- In opmaak.css komt je custom css code -->
+    <link rel="stylesheet" href="opmaak.css" nonce="<?php getNonce(); ?>">
 </head>
 <?php
 //Cookies accepteren weergeven
-if (!isset($_COOKIE['accept_cookies'])) {
+if (!isset($_COOKIE['accept_cookies']) and !isset($_POST['accept_cookies'])) {
     ?>
     <div class="has-background-danger has-text-white is-size-4">
         <div class="column is-10 is-offset-1">
@@ -29,6 +35,7 @@ if (!isset($_COOKIE['accept_cookies'])) {
                 <div class="column is-9">Deze website maakt alleen gebruik van functionele cookies</div>
                 <div class="column is-2">
                     <form method="post">
+                        <?php makeToken();?>
                         <input type="submit" value="OK" name="accept_cookies" class="button is-light">
                     </form>
                 </div>

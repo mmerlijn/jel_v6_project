@@ -32,7 +32,7 @@ function username():string
 
 function makeToken($field = true): void
 {
-    $bytes = random_bytes(20);
+    $bytes = random_bytes(32);
     $token = bin2hex($bytes);
     $_SESSION['tokens'][] = $token;
     if ($field) {
@@ -42,35 +42,32 @@ function makeToken($field = true): void
     }
 }
 
-//aliases
-function getToken():void
+function makeApiToken(): void
 {
-    makeToken();
+    $_SESSION['api_token'] = bin2hex(random_bytes(64));
+    echo $_SESSION['api_token'];
 }
-function setToken():void
-{
-    makeToken();
-}
-
 /*
  * Na het versturen van een formulier kan je validateToken() gebruiken om te controleren of de token bestaat
  * zie als voorbeeld login.php
  * */
-function validateToken($empty = true): bool
+function validateToken(): bool
 {
     if (in_array($_POST['_token'] ?? '', $_SESSION['tokens'] ?? [])) {
-        if ($empty) {
-            $_SESSION['tokens'] = [];
-        }
+        $_SESSION['tokens'] = []; //alle tokens wissen, zodat ze niet hergebruikt kunnen worden
+        return true;
+    }
+    if(($_SERVER['HTTP_X_CSRF_TOKEN']??'') == $_SESSION['api_token'] ){
         return true;
     }
     return false;
 }
 
+
 //wordt gebruikt indien de applicatie niet in de root directory staat
 function getPath(): string
 {
-    return str_replace("//", "/", pathinfo($_SERVER['REQUEST_URI'])['dirname'] . "/");
+    return str_replace(["//","\\/"], "/", pathinfo($_SERVER['PHP_SELF'])['dirname'] . "/");
 }
 
 //wordt gebruikt voor Content Security Policy

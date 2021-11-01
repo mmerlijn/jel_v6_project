@@ -2,42 +2,38 @@
 <?php
 //er is een login poging verstuurd
 if (isset($_POST['login'])) {
-    if (!validateToken()) {
-        $error = "Token is expired";
-    } else {
-        //huidige session leegmaken
-        unset($_SESSION['user']);
-        //probeer de gebruiker in te loggen via gegevens in de database
-        if (!empty($_POST['email']) and !empty($_POST['password'])) {
-            $email = mysqli_real_escape_string($link, $_POST['email']);
-            $password = mysqli_real_escape_string($link, $_POST['password']);
-            $result = mysqli_query($link
-                , "SELECT * FROM users WHERE `email`='$email' and `deleted_at` IS NULL LIMIT 1"
-            ); //or die mysqli_error($link));
-            $user = mysqli_fetch_assoc($result);
+    //huidige session leegmaken
+    unset($_SESSION['user']);
+    //probeer de gebruiker in te loggen via gegevens in de database
+    if (!empty($_POST['email']) and !empty($_POST['password'])) {
+        $email = mysqli_real_escape_string($link, $_POST['email']);
+        $password = mysqli_real_escape_string($link, $_POST['password']);
+        $result = mysqli_query($link
+            , "SELECT * FROM users WHERE `email`='$email' and `deleted_at` IS NULL LIMIT 1"
+        ); //or die mysqli_error($link));
+        $user = mysqli_fetch_assoc($result);
 
-            if ($user and count($user)) { //kijken of er data zit in $user, zo ja dan mag je naar binnen
-                if (password_verify($password, $user['password'])) {
-                    //Alle user gegevens zetten we in de session zodat je erg makkelijk gegevens van de user kan tonen
-                    //zonder de database te hoeven gebruiken. bv: echo $_SESSION['user']['email'];
-                    unset($user['password']); //deze wil ik niet bewaren
-                    $_SESSION['user'] = $user;
-                    if (isset($_SESSION['to'])) { //Indien een doorverwijzing dan...
-                        $to = $_SESSION['to'];
-                        unset($_SESSION['to']);
-                        header("location: " . $to);
-                    } else {
-                        header("location: index.php");
-                    }
+        if ($user and count($user)) { //kijken of er data zit in $user, zo ja dan mag je naar binnen
+            if (password_verify($password, $user['password'])) {
+                //Alle user gegevens zetten we in de session zodat je erg makkelijk gegevens van de user kan tonen
+                //zonder de database te hoeven gebruiken. bv: echo $_SESSION['user']['email'];
+                unset($user['password']); //deze wil ik niet bewaren
+                $_SESSION['user'] = $user;
+                if (isset($_SESSION['to'])) { //Indien een doorverwijzing dan...
+                    $to = $_SESSION['to'];
+                    unset($_SESSION['to']);
+                    header("location: " . $to);
+                } else {
+                    header("location: index.php");
                 }
-            } else {
-                //Als inloggen faalt dan ...
-                $error = "Geen gebruiker gevonden met deze gegevens";
             }
         } else {
-            // geen gegevens meegstuurd
-            $error = "Email en wachtwoord zijn verplicht";
+            //Als inloggen faalt dan ...
+            $error = "Geen gebruiker gevonden met deze gegevens";
         }
+    } else {
+        // geen gegevens meegstuurd
+        $error = "Email en wachtwoord zijn verplicht";
     }
 }
 
