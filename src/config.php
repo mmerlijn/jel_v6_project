@@ -6,6 +6,8 @@ $page = [
     'title' => 'V6 MySQL/PHP project',
     'by' => 'Menno Merlijn &copy;',
     'charset' => "utf8",
+    'domain' => 'localhost',
+    'secure' => false
 ];
 
 $database = [
