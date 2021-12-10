@@ -1,22 +1,25 @@
 ## Project maak een webapplicatie V6
 
-Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten. 
+Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten.
 
 ### Installeren
-- Download de de code. Na het downloaden kan deze worden geplaatst in de UsbWebserver directory de map *root* zal worden overschreven en de map *src* zal worden toegevoegd.
+
+- Download de de code. Na het downloaden kan deze worden geplaatst in de UsbWebserver directory de map *root* zal worden
+  overschreven en de map *src* zal worden toegevoegd.
 - Importeer de database met de tabel users, deze staat in src/database.sql
-  - Dit maakt een database `v6` aan met een tabel `users`
-  - In de database staan 3 gebruikers
-    - admin@psg.nl met ww: admin
-    - user@psg.nl met ww: user
-    - test@mail.nl met ww: test
+    - Dit maakt een database `v6` aan met een tabel `users`
+    - In de database staan 3 gebruikers
+        - admin@psg.nl met ww: admin
+        - user@psg.nl met ww: user
+        - test@mail.nl met ww: test
 - Pas de configuratie parameters aan in src/config.php
-  - Om het te laten werken moet minimaal het wachtwoord van de database user worden aangepast
-  - Daarnaast is het handig om de charset goed te zetten
-- Opioneel: Voer het script create_users.php uit [create_users.php](http://localhost/create_users.php) (of pas eerst aan naar wens)
-   Met het script *create_users.php* worden gebruikeraccounts aangemaakt
-  
-  **Nadat de gebruikers aangemaakt zijn moet het bestand *create_users.php* worden verwijderd!!!** 
+    - Om het te laten werken moet minimaal het wachtwoord van de database user worden aangepast
+    - Daarnaast is het handig om de charset goed te zetten
+- Opioneel: Voer het script create_users.php uit [create_users.php](http://localhost/create_users.php) (of pas eerst aan
+  naar wens)
+  Met het script *create_users.php* worden gebruikeraccounts aangemaakt
+
+  **Nadat de gebruikers aangemaakt zijn moet het bestand *create_users.php* worden verwijderd!!!**
 
 ### Opzet
 
@@ -30,7 +33,6 @@ Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten.
 - Stylesheets en anders header parameters in *header.php*
 - Alles in de footer in *footer.php*
 
-
 ### Pagina's
 
 - Startpagina *index.php*
@@ -42,6 +44,7 @@ Dit is een eenvoudige opzet hoe je een project zou op kunnen zetten.
 ### Layout onbeveiligde pagina
 
 Onderstaande code kan je gebruiken als template voor een onbeveiligde pagina
+
 ```html
 <?php include "../src/start.php";?>
 <?php include "../src/header.php";?>
@@ -54,6 +57,7 @@ Onderstaande code kan je gebruiken als template voor een onbeveiligde pagina
 ### Layout beveiligde pagina
 
 Onderstaande code kan je gebruiken als template voor een beveiligde pagina
+
 ```html
 <?php include "../src/start.php";?>
 <?php include "../src/auth.php";?>
@@ -86,50 +90,86 @@ if(!hasRole('admin')){
 
 ### Menu
 
-Het menu staat in *menu.php* en maakt gebruik van een standaard menu van [bulma](https://bulma.io/documentation/components/navbar/)
+Het menu staat in *menu.php* en maakt gebruik van een standaard menu
+van [bulma](https://bulma.io/documentation/components/navbar/)
 Deze is volledig naar wens aan te passen.
 
 ### Footer en debug
 
-In *footer.php* is de footer tekst aan te passen. Of naar wens te configureren. Indien je geen footer wilt kan je dit bestand ook leegmaken.
-LET OP dat in footer ook de *debug* staat. Dit is handig tijdens het ontwikkelen. Je kan debug in *src/config.php* uitzetten.
+In *footer.php* is de footer tekst aan te passen. Of naar wens te configureren. Indien je geen footer wilt kan je dit
+bestand ook leegmaken. LET OP dat in footer ook de *debug* staat. Dit is handig tijdens het ontwikkelen. Je kan debug
+in *src/config.php* uitzetten.
 
 ### Content Security Policy
-De applicatie maakt gebruik van een [CSP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) deze maakt onze website veiliger voor eindgebruikers.
+
+De applicatie maakt gebruik van een [CSP header](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) deze maakt onze
+website veiliger voor eindgebruikers.
 
 Indien je een zelf een stukje javascript wilt toevoegen aan je project kan je dat als volgt doen.
+
 ```html
+
 <script nonce="<?php echo getNonce(); ?>">
-// je script code
+    // je script code
 </script>
 ```
+
 Indien je op een speficieke pagina een stukje CSS wilt toevoegen kan dat alsvolgt
+
 ```html
+
 <style nonce="<?php echo getNonce(); ?>">
-/* je script code */
+    /* je script code */
 </style>
 ```
 
-Inline styles/scripts worden default geblokkeerd. Kijk regelmatig even bij `developer tools -> console` hier kan je zien dat bepaalde code wordt geblokkeerd. Wanneer je dit toch wilt toestaan kan dit door het aanpassen van de CSP header in *start.php*
+Inline styles/scripts worden default geblokkeerd. Kijk regelmatig even bij `developer tools -> console` hier kan je zien
+dat bepaalde code wordt geblokkeerd. Wanneer je dit toch wilt toestaan kan dit door het aanpassen van de CSP header in *
+start.php*
 
 ### CSRF-protection
-Deze applicatie heeft een zeer eenvoudige [CSRF-protectie](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
-Bij elke aanvraag bij de server (post request) zal gekeken worden of er een geldige *token* wordt meegestuurd.
-Deze token kan eenvoudig aan je formulier worden toegevoegd d.m.v. `<?php makeToken(); ?>`. Hieronder een voorbeeld:
+
+Deze applicatie heeft een zeer
+eenvoudige [CSRF-protectie](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+Bij elke aanvraag bij de server (post request) zal gekeken worden of er een geldige *token* wordt meegestuurd. Deze
+token kan eenvoudig aan je formulier worden toegevoegd d.m.v. `<?php makeToken(); ?>`. Hieronder een voorbeeld:
+
 ```html
+
 <form method="post">
-  <?php makeToken(); ?>
+    <?php makeToken(); ?>
 </form>
 ```
-Bij een api-request (via VueJs) zal deze token automatisch worden meegestuurd.
-Alle meegestuurde tokens zullen in *start.php* automatisch worden gevalideerd.
+
+Bij een api-request (via VueJs) zal deze token automatisch worden meegestuurd. Alle meegestuurde tokens zullen in *
+start.php* automatisch worden gevalideerd.
+
+### Flash bericht
+
+Het is mogelijk om de gebruikers feedback te geven op acties door middel van een flash bericht. Het bericht moet altijd
+aangemaakt zijn voor de include van header.php
+
+Gebruik voor een succes bericht
+
+```php
+flash('Dat heb je goed gedaan');
+```
+
+Gebruik voor een error bericht
+
+```php
+flash('Oeps, er is iets misgegaan',false);
+```
 
 ### Extra's
-In de *src/header.php* worden [vue.js](https://vuejs.org/v2/guide) en axios libraries ingeladen.
-In de pagina *zoek-users.php* is een voorbeeld te vinden hoe je dit kan gebruiken om bijvoorbeeld naar users te zoeken. (alleen toegankelijk voor admins)
+
+In de *src/header.php* worden [vue.js](https://vuejs.org/v2/guide) en axios libraries ingeladen. In de pagina *
+zoek-users.php* is een voorbeeld te vinden hoe je dit kan gebruiken om bijvoorbeeld naar users te zoeken. (alleen
+toegankelijk voor admins)
 Het werkelijke zoeken gebeurt in *api/zoek_users.php*
-Vue.js samen met axios maken het mogelijk om zonder een page-refresh te zoeken naar data.
-Door middel van *F12* -> *netwerk* kan je zien wat er wordt verstuurd tijdens het zoeken.
+Vue.js samen met axios maken het mogelijk om zonder een page-refresh te zoeken naar data. Door middel van *F12* -> *
+netwerk* kan je zien wat er wordt verstuurd tijdens het zoeken.
 
 ### Bugs en security issues
+
 Indien je problemen tegenkomt laat het weten. Alleen door samenwerken kunnen we de wereld verbeteren!
