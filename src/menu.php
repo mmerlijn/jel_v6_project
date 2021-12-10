@@ -47,6 +47,9 @@
                 </svg>
                 Contact
             </a>
+            <a class="navbar-item" href="flash_example.php">
+                Flash
+            </a>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">

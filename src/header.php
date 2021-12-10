@@ -11,9 +11,12 @@
     <!-- Onderstaande script alleen laten staan als je ook gebruik van VueJs gaan maken -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script nonce="<?php echo getNonce();?>">
+    <script nonce="<?php echo getNonce(); ?>">
         axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         axios.defaults.headers.common['X-CSRF-TOKEN'] = '<?php makeApiToken(false);?>';
+        var exitFlash = setTimeout(function () {
+            document.getElementById('flash_msg').remove();
+        }, <?php echo $page['flash_duration'] ?? 2500;?>);
     </script>
     <!-- einde scripts voor VueJs -->
 
@@ -35,7 +38,7 @@ if (!isset($_COOKIE['accept_cookies']) and !isset($_POST['accept_cookies'])) {
                 <div class="column is-9">Deze website maakt alleen gebruik van functionele cookies</div>
                 <div class="column is-2">
                     <form method="post">
-                        <?php makeToken();?>
+                        <?php makeToken(); ?>
                         <input type="submit" value="OK" name="accept_cookies" class="button is-light">
                     </form>
                 </div>
@@ -45,9 +48,11 @@ if (!isset($_COOKIE['accept_cookies']) and !isset($_POST['accept_cookies'])) {
     </div>
     <?php
 } //einde accept_cookies
+
 ?>
 <nav>
     <?php include "menu.php"; ?>
 </nav>
+<?php include "flash.php"; ?>
 <main>
 

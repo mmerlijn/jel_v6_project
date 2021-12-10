@@ -3,7 +3,7 @@
     <div class="is-pink is-fixed-bottom navbar">
         <div class="column is-half is-offset-one-quarter">
             <div class="has-text-centered is-italic">
-                Deze website is gemaakt door <?php echo $page['by']; ?> 2021
+                Deze website is gemaakt door <?php echo $page['by']; ?> &copy; 2021
             </div>
         </div>
     </div>

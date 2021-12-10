@@ -4,10 +4,11 @@ $debug = true; //true / false (geeft session / post variabele weer)
 //pagina specifieke kenmerken
 $page = [
     'title' => 'V6 MySQL/PHP project',
-    'by' => 'Menno Merlijn &copy;',
+    'by' => 'Menno Merlijn',
     'charset' => "utf8",
     'domain' => 'localhost',
-    'secure' => false
+    'secure' => false,
+    'flash_duration' => 2500, //in millisecond
 ];
 
 $database = [

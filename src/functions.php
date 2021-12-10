@@ -8,7 +8,7 @@ function isLogin(): bool
     return false;
 }
 
-function hasRole($role):bool
+function hasRole($role): bool
 {
     if ($_SESSION['user']['id'] ?? false) {
         return $_SESSION['user']['role'] == $role;
@@ -16,12 +16,22 @@ function hasRole($role):bool
     return false;
 }
 
-function username():string
+function username(): string
 {
     if ($_SESSION['user']['id'] ?? false) {
         return $_SESSION['user']['voornaam'] . " " . $_SESSION['user']['tussenvoegsel'] . " " . $_SESSION['user']['achternaam'];
     }
     return '';
+}
+
+function flash(string $msg, bool $succes = true): void
+{
+    $_SESSION['flash']['msg'] = $msg;
+    if ($succes) {
+        $_SESSION['flash']['success'] = $msg;
+    } else {
+        $_SESSION['flash']['error'] = $msg;
+    }
 }
 
 /*
@@ -47,6 +57,7 @@ function makeApiToken(): void
     $_SESSION['api_token'] = bin2hex(random_bytes(64));
     echo $_SESSION['api_token'];
 }
+
 /*
  * Na het versturen van een formulier kan je validateToken() gebruiken om te controleren of de token bestaat
  * zie als voorbeeld login.php
@@ -57,7 +68,7 @@ function validateToken(): bool
         $_SESSION['tokens'] = []; //alle tokens wissen, zodat ze niet hergebruikt kunnen worden
         return true;
     }
-    if(($_SERVER['HTTP_X_CSRF_TOKEN']??'') == $_SESSION['api_token'] ){
+    if (($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '') == $_SESSION['api_token']) {
         return true;
     }
     return false;
@@ -67,7 +78,7 @@ function validateToken(): bool
 //wordt gebruikt indien de applicatie niet in de root directory staat
 function getPath(): string
 {
-    return str_replace(["//","\\/"], "/", pathinfo($_SERVER['PHP_SELF'])['dirname'] . "/");
+    return str_replace(["//", "\\/"], "/", pathinfo($_SERVER['PHP_SELF'])['dirname'] . "/");
 }
 
 //wordt gebruikt voor Content Security Policy

@@ -19,13 +19,19 @@ if (isset($_POST['login'])) {
                 //zonder de database te hoeven gebruiken. bv: echo $_SESSION['user']['email'];
                 unset($user['password']); //deze wil ik niet bewaren
                 $_SESSION['user'] = $user;
+                flash("Welkom " . username() . " je bent succesvol ingelogd");
                 if (isset($_SESSION['to'])) { //Indien een doorverwijzing dan...
                     $to = $_SESSION['to'];
                     unset($_SESSION['to']);
                     header("location: " . $to);
+                    exit();
                 } else {
                     header("location: index.php");
+                    exit();
                 }
+            } else {
+                //Als wachtwoord onjuist is
+                $error = "Geen gebruiker gevonden met deze gegevens";
             }
         } else {
             //Als inloggen faalt dan ...
@@ -34,6 +40,9 @@ if (isset($_POST['login'])) {
     } else {
         // geen gegevens meegstuurd
         $error = "Email en wachtwoord zijn verplicht";
+    }
+    if ($error ?? false) {
+        flash($error, false);
     }
 }
 
@@ -65,7 +74,7 @@ if (isset($_POST['login'])) {
                     </div>
                 </form>
                 <?php
-                if (isset($error)) {
+                if ($error ?? false) {
                     echo "<p class=\"help is-danger\">$error</p>";
                 }
                 ?>
