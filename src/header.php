@@ -51,8 +51,8 @@ if (!isset($_COOKIE['accept_cookies']) and !isset($_POST['accept_cookies'])) {
 
 ?>
 <nav>
-    <?php include "menu.php"; ?>
+    <?php include __DIR__ . "/menu.php"; ?>
 </nav>
-<?php include "flash.php"; ?>
+<?php include __DIR__ . "/flash.php"; ?>
 <main>
 
